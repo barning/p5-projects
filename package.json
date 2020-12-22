@@ -9,7 +9,7 @@
   },
   "browserslist": "defaults",
   "dependencies": {
-    "p5": "^0.10.2"
+    "p5": "^1.1.9"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
