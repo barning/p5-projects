@@ -2,7 +2,7 @@
   "presets": [
     "@babel/preset-env"
   ],
-  "compact": false,
+  "compact": true,
   "exclude": [
     "node_modules"
   ]
