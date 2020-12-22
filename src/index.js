@@ -8,7 +8,7 @@ import sketch160519 from './sketches/160519';
 import sketch290519 from './sketches/290519';
 import sketch310519 from './sketches/310519';
 
-// import medienfarben from './sketches/medienfarben';
+import medienfarben from './sketches/medienfarben';
 
 allSketches.push(
   // template,
@@ -16,7 +16,7 @@ allSketches.push(
   sketch160519,
   sketch290519,
   sketch310519,
-  // medienfarben
+  medienfarben
 );
 
 allSketches.forEach(sketch => {

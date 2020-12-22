@@ -1,17 +1,12 @@
-// import colorsjson from './colors.json';
+import colors from './colors.json';
 
 export default function sketch(s) {
 
-  const bubbles = [];
+  let bubbles = [];
 
-  let colors = 0;
-  const ctx = 0;
+  let ctx = 0;
 
   const size = 500;
-
-  s.preload = () => {
-    colors = s.loadJSON('./colors.json');
-  }
 
   s.setup = () => {
     ctx = s.createCanvas(size, size);

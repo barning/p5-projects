@@ -9,7 +9,8 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
-    port: 8080,
+    watchContentBase: true,
+    port: 3000,
     open: true,
     stats: 'errors-only',
   },
@@ -36,12 +37,16 @@ module.exports = {
       template: path.resolve(__dirname, 'src', 'index.html'),
       inject: 'body',
     }),
-    new CopyWebpackPlugin([
+    new CopyWebpackPlugin(
       {
-        from: path.resolve(__dirname, 'assets'),
-        to: path.resolve(__dirname, 'dist', 'assets'),
+        patterns: [
+          {
+            from: path.resolve(__dirname, 'assets'),
+            to: path.resolve(__dirname, 'dist', 'assets')
+          }
+        ]
       }
-    ]),
+    ),
   ],
   devtool: 'source-map'
 };
