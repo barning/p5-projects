@@ -10,8 +10,6 @@ export default function sketch(s) {
     "#ff7043"
   ];
 
-  let previousMillis = 0;
-  const interval = 100;
   let circle;
 
   const width = 500;

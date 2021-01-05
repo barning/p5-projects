@@ -3,20 +3,23 @@ import p5 from 'p5';
 let allSketches = [];
 
 // import template from './sketches/template';
-import sketch100518 from './sketches/100518';
-import sketch160519 from './sketches/160519';
-import sketch290519 from './sketches/290519';
-import sketch310519 from './sketches/310519';
+import sketch20180510 from './sketches/20180510';
+import sketch20190516 from './sketches/20190516';
+import sketch20190529 from './sketches/20190529';
+import sketch20190531 from './sketches/20190531';
 
 import medienfarben from './sketches/medienfarben';
 
+import sketch20210104 from './sketches/20210104';
+
 allSketches.push(
   // template,
-  sketch100518,
-  sketch160519,
-  sketch290519,
-  sketch310519,
-  medienfarben
+  sketch20180510,
+  sketch20190516,
+  sketch20190529,
+  sketch20190531,
+  medienfarben,
+  sketch20210104
 );
 
 allSketches.forEach(sketch => {

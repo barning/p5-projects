@@ -1,4 +1,4 @@
-import colors from './colors.json';
+import returnRandomColor from '../helpers/colors';
 
 export default function sketch(s) {
 
@@ -25,10 +25,10 @@ export default function sketch(s) {
     drawText();
   }
 
-  s.mousePressed = () => {
-    s.redraw();
-    s.save('myCanvas.jpg');
-  }
+  // s.mousePressed = () => {
+  //   s.redraw();
+  //   s.save('myCanvas.jpg');
+  // }
 
   function drawText() {
     s.textAlign(s.LEFT);
@@ -39,22 +39,12 @@ export default function sketch(s) {
     s.text('medien\nfarben', (size / 2) / 8, size / 2 - 20);
   }
 
-  function manageColor() {
-    const mainLength = s.int(s.random(0, Object.keys(colors).length));
-    const mainName = Object.keys(colors)[mainLength];
-    const randomColor = s.int(s.random(0, Object.keys(colors)[mainLength].length))
-    const colorNames = Object.values(colors[mainName]);
-    const mainCol = colorNames[s.int(s.random(0, colorNames.length))];
-
-    return (mainCol);
-  }
-
   function Bubble() {
     this.diameter = s.random(size - 300, size + 300);
     this.x = s.random(this.diameter / 4, size - this.diameter / 4);
     this.y = s.random(this.diameter / 4, size - this.diameter / 4);
     this.speed = 10;
-    this.mainCol = manageColor();
+    this.mainCol = returnRandomColor();
 
     this.display = function () {
       s.fill(this.mainCol);
