@@ -11,6 +11,7 @@ import sketch20190531 from './sketches/20190531';
 import medienfarben from './sketches/medienfarben';
 
 import sketch20210104 from './sketches/20210104';
+import sketch20210426 from './sketches/20210426';
 
 allSketches.push(
   // template,
@@ -19,7 +20,8 @@ allSketches.push(
   sketch20190529,
   sketch20190531,
   medienfarben,
-  sketch20210104
+  sketch20210104,
+  sketch20210426
 );
 
 allSketches.forEach(sketch => {
