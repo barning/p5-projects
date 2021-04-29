@@ -1,2 +1,2 @@
 # p5-projects
-Project Manager for P5js
+My very own processing/p5js sketchbook.
