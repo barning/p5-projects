@@ -6,15 +6,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   entry: {
     bundle: path.resolve(__dirname, 'src', 'index.js')
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    watchContentBase: true,
-    port: 3000,
-    open: true,
-    stats: 'errors-only',
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -68,5 +69,8 @@ module.exports = {
       }
     ),
   ],
+  performance: {
+    hints: process.env.NODE_ENV === 'production' ? "warning" : false
+  },
   devtool: 'source-map'
 };
