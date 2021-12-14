@@ -11,6 +11,7 @@
   },
   "browserslist": "defaults",
   "dependencies": {
+    "ml5": "^0.7.1",
     "p5": "^1.4.0"
   },
   "devDependencies": {
