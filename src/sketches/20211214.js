@@ -1,54 +1,48 @@
 import ml5 from 'ml5';
 
-// ml5.js: Pose Estimation with PoseNet
-// The Coding Train / Daniel Shiffman
-// https://thecodingtrain.com/learning/ml5/7.1-posenet.html
-// https://youtu.be/OIo-DIOkNVg
-// https://editor.p5js.org/codingtrain/sketches/ULA97pJXR
 export default function sketch(s) {
   let facemesh;
   let video;
   let predictions = [];
-  
-  s.setup = () => {
+
+  s.setup = async () => {
     s.createCanvas(500, 500);
+
+    // Setup video capture
     video = s.createCapture(s.VIDEO);
     video.size(500, 500);
-  
-    facemesh = ml5.facemesh(video, modelReady);
-  
-    // This sets up an event that fills the global variable "predictions"
-    // with an array every time new predictions are made
-    facemesh.on("predict", results => {
+    video.hide();
+
+    // Load facemesh model asynchronously
+    facemesh = await ml5.facemesh(video, { flipHorizontal: true }, modelReady);
+
+    // Listen for predictions
+    facemesh.on('predict', (results) => {
       predictions = results;
     });
-  
-    // Hide the video element, and just show the canvas
-    video.hide();
-  }
-  
+  };
+
   function modelReady() {
-    console.log("Model ready!");
+    console.log('Facemesh model loaded.');
   }
-  
+
   s.draw = () => {
-    s.background(230,200,230);
-    
-    // We can call both functions to draw all keypoints
+    s.background(230, 200, 230);
+    s.image(video, 0, 0, 500, 500);
+
     drawKeypoints();
-  }
-  
-  // A function to draw ellipses over the detected keypoints
+  };
+
+  // Function to draw ellipses over detected keypoints
   function drawKeypoints() {
     for (let i = 0; i < predictions.length; i += 1) {
       const keypoints = predictions[i].scaledMesh;
-  
-      // Draw facial keypoints.
+
       for (let j = 0; j < keypoints.length; j += 1) {
-        const [x, y] = keypoints[j];
-  
-        s.fill('rgba(50,50,50, 0.1)');
-        s.ellipse(x, y, 1, 1);
+        const [x, y, z] = keypoints[j]; // z-Wert hinzufügen für 3D-Tiefe (falls benötigt)
+        s.fill(50, 50, 50, 150);
+        s.noStroke();
+        s.ellipse(x, y, 4, 4); // Größere Punkte für bessere Sichtbarkeit
       }
     }
   }

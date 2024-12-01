@@ -1,33 +1,50 @@
 import p5 from 'p5';
 
-let allSketches = [];
+// Load all sketches
+const context = require.context('./sketches', false, /\.js$/);
+const sketches = context.keys().map(key => ({
+  name: key.replace('./', '').replace('.js', ''),
+  sketch: context(key).default
+}));
 
-// import template from './sketches/template';
-import sketch20180510 from './sketches/20180510';
-import sketch20190516 from './sketches/20190516';
-import sketch20190529 from './sketches/20190529';
-import sketch20190531 from './sketches/20190531';
-
-import medienfarben from './sketches/medienfarben';
-
-import sketch20210104 from './sketches/20210104';
-import sketch20210426 from './sketches/20210426';
-import sketch20211214 from './sketches/20211214';
-
-allSketches.push(
-  // template,
-  sketch20180510,
-  sketch20190516,
-  sketch20190529,
-  sketch20190531,
-  medienfarben,
-  sketch20210104,
-  sketch20210426,
-  sketch20211214
-);
-
-allSketches.forEach(sketch => {
-  new p5(sketch);
+// Create placeholder
+const body = document.querySelector('body');
+sketches.forEach((sketch, index) => {
+  const placeholder = document.createElement('div');
+  placeholder.id = `sketch-placeholder-${index}`;
+  placeholder.className = 'sketch-placeholder';
+  body.appendChild(placeholder);
 });
 
+// Initialize new sketch
+function loadSketch(sketch, containerId) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    new p5(sketch, container);
+  }
+}
 
+// configure Intersection Observer
+const observerOptions = {
+  root: null,
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const index = entry.target.id.split('-').pop();
+      const { sketch } = sketches[index];
+      loadSketch(sketch, entry.target.id);
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Watch placeholder
+sketches.forEach((_, index) => {
+  const element = document.getElementById(`sketch-placeholder-${index}`);
+  if (element) {
+    observer.observe(element);
+  }
+});
