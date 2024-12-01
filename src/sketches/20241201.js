@@ -1,6 +1,6 @@
 export default function sketch(s) {
     s.setup = () => {
-        s.createCanvas(400, 600);
+        s.createCanvas(500, 800);
     };
 
     s.draw = () => {
